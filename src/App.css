@@ -1,0 +1,17 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100vw;
+  background-color: beige;
+}
+
+.Header{
+  margin: 50px;
+  text-align: center;
+}
+
+.Body {
+  max-width: 1000px;
+  margin: 50px auto;
+}
