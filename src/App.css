@@ -2,25 +2,39 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   width: 100vw;
-  background-color: beige;
 }
 
-.Body {
+.body {
   max-width: 1000px;
-  margin: 50px auto;
+  /* padding: 100px auto; */
+  margin: 20px;
 }
 
 .Header{
-  margin: 50px;
-  text-align: center;
+  background-color: #cc0000;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: none;
+  border-bottom: 5px solid #023474;
 }
 
 .header{
+  margin: auto;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+#title {
+  margin-left: 10px;
+  text-align: center;
+  color: #ffffff;
 }
 
 .MatchHeaderContainer{
@@ -29,6 +43,9 @@
 
 .MHInfo {
   font-style: italic;
+  font-size: smaller;
+  color: #9d834a;
+  margin-bottom: 3px;
 }
 
 .MHBanner {
