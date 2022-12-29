@@ -3,6 +3,7 @@ import { fetchMatches } from "./api-client.js";
 import "./App.css";
 import Header from "./components/Header.js";
 import MatchHeader from "./components/MatchHeader.js";
+import MatchSelect from "./components/MatchSelect.js";
 
 function App() {
   const [matches, setMatches] = useState([])
@@ -39,12 +40,7 @@ function App() {
       </div>
       <div className="body">
         <div className="dropdown">
-          <select id='match-select' onChange={()=>handleSelect()}>
-            <option value=''>-- Overview - select match --</option>
-            {matches.length > 0 && matches.map(data => {
-              return <option key={data.matchid} value={data.matchid}>{data.shortDate}: {data.homeTeamShort} vs. {data.awayTeamShort}</option>
-            })}
-          </select>
+          <MatchSelect matches={matches} handleSelect={handleSelect}/>
         </div>
 
         <div className="next-matches">
@@ -52,7 +48,6 @@ function App() {
             return <MatchHeader key={data.matchid} data={data}/>
           })}
         </div>
-        <div className="comments">Comments</div>
       </div>
     </div>
   );
