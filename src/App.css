@@ -6,14 +6,76 @@
   background-color: beige;
 }
 
+.Body {
+  max-width: 1000px;
+  margin: 50px auto;
+}
+
 .Header{
   margin: 50px;
   text-align: center;
 }
 
-.Body {
-  max-width: 1000px;
-  margin: 50px auto;
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
+
+.MatchHeaderContainer{
+  margin-top: 10px;
+}
+
+.MHInfo {
+  font-style: italic;
+}
+
+.MHBanner {
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+.MHHome {
+  padding: 5px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  width: 50%;
+}
+.MHAway {
+  padding: 5px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  width: 50%;
+  text-align: right;
+}
+
+.MHVS {
+  position: absolute;
+  top: 0;
+  /* left: 45%; */
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.MHVS div {
+  padding: 4px;
+  border: 1px solid black;
+  border-radius: 100%;
+  background-color: lightgray;
+  color: black;
+  text-align: center;
+}
+
+
 
 /* Arsenal Colors: #cc0000 "secondary": "#ffffff",*/

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { fetchMatches } from "./api-client";
+import { fetchMatches } from "./api-client.js";
 import "./App.css";
+import Header from "./components/header.js";
+import MatchHeader from "./components/MatchHeader.js";
 
 function App() {
   const [matches, setMatches] = useState([])
   const [reservedTickets, setResTics] = useState([])
-
+  const [selectedMatch, setSelectedMatch] = useState({})
+  
   useEffect(()=> {
     const getMatches = async () => {
       const matches =  await fetchMatches()
@@ -22,18 +25,21 @@ function App() {
 
   return (
     <div className="App">
-      <div className="Header">Header</div>
+      <div className="Header"><Header /></div>
       <div className="Body">
         <div className="dropdown">
           <select name='match' id='match-select'>
             <option value=''>--please select a game--</option>
             {matches.length > 0 && matches.map(data => {
-              return <option>{data.shortDate} - {data.tournament}, round {data.round}: <strong>{data.homeTeamShort} vs. {data.awayTeamShort}</strong></option>
+              return <option>{data.shortDate} - {data.tournament}, round {data.round}: {data.homeTeamShort} vs. {data.awayTeamShort}</option>
             })}
           </select>
         </div>
-        <div className="form">
-          
+
+        <div className="next-matches">
+          {matches.length > 0 && matches.map(data =>{
+            return <MatchHeader key={data.matchid} data={data}/>
+          })}
         </div>
         <div className="comments">Comments</div>
       </div>
