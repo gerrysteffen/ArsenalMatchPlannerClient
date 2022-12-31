@@ -5,6 +5,7 @@ import Header from './components/Header.js';
 import IndividualMatch from './components/IndividualMatch.js';
 import MatchSelect from './components/MatchSelect.js';
 import NextMatches from './components/NextMatches.js';
+import { dateTransform } from './date-transformer.js';
 
 function App() {
   const [matches, setMatches] = useState([]);
@@ -13,14 +14,8 @@ function App() {
 
   useEffect(() => {
     const getMatches = async () => {
-      const matches = await fetchMatches();
-      matches.map((match) => {
-        const date = new Date(match.timestamp * 1000).toLocaleString('en-GB', {
-          timeZone: 'Europe/London',
-        });
-        match.date = date;
-        match.shortDate = match.date.slice(0, 10);
-      });
+      const data = await fetchMatches();
+      const matches = dateTransform(data)
       setMatches(matches);
     };
     getMatches();
@@ -45,13 +40,13 @@ function App() {
         </div>
 
         <div className="next-matches">
-          {matches.length !== 0 && selectedMatch.length === 0 && (
+          {matches.length !== 0 && selectedMatch === '' && (
             <NextMatches matches={matches} />
           )}
         </div>
 
         <div className="individual-match">
-          {matches.length !== 0 && selectedMatch.length !== 0 && (
+          {matches.length !== 0 && selectedMatch !== '' && (
             <IndividualMatch
               match={
                 matches.find((match) => match.matchid == selectedMatch)
