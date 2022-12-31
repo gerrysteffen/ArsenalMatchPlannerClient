@@ -15,7 +15,7 @@
 .Header{
   background-color: #cc0000;
   width: 100%;
-  padding: 20px;
+  padding: 20px 0px 10px 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,11 +37,15 @@
   color: #ffffff;
 }
 
-.MatchHeaderContainer{
+.MatchHeader{
   margin-top: 10px;
 }
 
-.MHInfo {
+.NextMatches{
+  margin-top: 10px;
+}
+
+.MHInfoShort {
   font-style: italic;
   font-size: smaller;
   color: #9d834a;

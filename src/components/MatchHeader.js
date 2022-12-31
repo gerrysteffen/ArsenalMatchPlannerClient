@@ -1,23 +1,17 @@
 import React from 'react';
+import MatchBanner from './MatchBanner';
 
-function MatchHeader({data}) {
+function MatchHeader({match}) {
   return (
-    <div className='MatchHeaderContainer'>
-      <div className='MHInfo'>
-        {data.date} - {data.tournament}, Round {data.round}: 
+    <div className='MatchHeader'>
+      <div>
+        <MatchBanner match={match} />
       </div>
-      <div className='MHBanner'>
-        <div className='MHHome' style={{'backgroundColor': data.homeTeam.teamColors.primary, 'color': data.homeTeam.teamColors.text}}>
-          {data.homeTeam.shortName}
-        </div>
-        <div className='MHAway' style={{'backgroundColor': data.awayTeam.teamColors.primary, 'color': data.awayTeam.teamColors.text}}>
-          {data.awayTeam.shortName}
-        </div>
-        <div className='MHVS'>
-          <div>
-            VS
-          </div>
-        </div>
+      <div className='MHInfo'>
+        {match.date} - {match.tournament}, Round {match.round}: 
+      </div>
+      <div>
+        
       </div>
     </div>
   );

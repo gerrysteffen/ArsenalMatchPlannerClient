@@ -1,37 +1,42 @@
-import { useEffect, useState } from "react";
-import { fetchMatches } from "./api-client.js";
-import "./App.css";
-import Header from "./components/Header.js";
-import MatchHeader from "./components/MatchHeader.js";
-import MatchSelect from "./components/MatchSelect.js";
+import { useEffect, useState } from 'react';
+import { fetchMatches } from './api-client.js';
+import './App.css';
+import Header from './components/Header.js';
+import MatchHeader from './components/MatchHeader.js';
+import MatchSelect from './components/MatchSelect.js';
+import NextMatches from './components/NextMatches.js';
 
 function App() {
-  const [matches, setMatches] = useState([])
-  const [reservedTickets, setResTics] = useState([])
-  const [selectedMatch, setSelectedMatch] = useState([])
-  
-  useEffect(()=> {
+  const [matches, setMatches] = useState([]);
+  const [reservedTickets, setResTics] = useState([]);
+  const [selectedMatch, setSelectedMatch] = useState('');
+
+  useEffect(() => {
     const getMatches = async () => {
-      const matches =  await fetchMatches()
-      matches.map(match => {
-        const date = new Date(match.timestamp*1000).toLocaleString('en-GB', {timeZone: 'Europe/London'})
-        match.date = date
-        match.shortDate = match.date.slice(0,10)
-      })
-      // console.log(matches)
-      setMatches(matches)
-    }
-    getMatches()
-  },[])
+      const matches = await fetchMatches();
+      matches.map((match) => {
+        const date = new Date(match.timestamp * 1000).toLocaleString('en-GB', {
+          timeZone: 'Europe/London',
+        });
+        match.date = date;
+        match.shortDate = match.date.slice(0, 10);
+      });
+      setMatches(matches);
+    };
+    getMatches();
+  }, []);
 
   const handleSelect = () => {
-    if (document.getElementById("match-select").value != '') {
-      const selMatch = matches.filter((match) => match.matchid == document.getElementById("match-select").value)
-      setSelectedMatch(selMatch)
+    if (document.getElementById('match-select').value != '') {
+      // const selMatch = matches.filter(
+      //   (match) =>
+      //     match.matchid == document.getElementById('match-select').value
+      // );
+      setSelectedMatch(document.getElementById('match-select').value);
     } else {
-      setSelectedMatch([])
+      setSelectedMatch('');
     }
-  }
+  };
 
   return (
     <div className="App">
@@ -40,13 +45,19 @@ function App() {
       </div>
       <div className="body">
         <div className="dropdown">
-          <MatchSelect matches={matches} handleSelect={handleSelect}/>
+          <MatchSelect matches={matches} handleSelect={handleSelect} />
         </div>
 
         <div className="next-matches">
-          {matches.length !== 0 && selectedMatch.length === 0 && matches.map(data =>{
-            return <MatchHeader key={data.matchid} data={data}/>
-          })}
+          {matches.length !== 0 && selectedMatch.length === 0 && (
+            <NextMatches matches={matches} />
+          )}
+        </div>
+
+        <div className="match-header">
+          {matches.length !== 0 && selectedMatch.length !== 0 && matches
+          .filter((match) => match.matchid == selectedMatch)
+          .map((match) => <MatchHeader match={match} /> )}
         </div>
       </div>
     </div>

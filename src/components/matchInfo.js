@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MatchInfo(props) {
+function MatchInfo({match}) {
   return (
     <div>
       
