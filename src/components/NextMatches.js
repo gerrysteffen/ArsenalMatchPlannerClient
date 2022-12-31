@@ -9,8 +9,8 @@ function NextMatches({matches}) {
       {matches.map(match =>{
             return (
               <div className='NextMatches'>
-                <MatchInfoShort match={match} />
-                <MatchBanner match={match} />
+                <MatchInfoShort key={match.matchid+"info"} match={match} />
+                <MatchBanner key={match.matchid+"banner"} match={match} />
               </div>
             )
       })}

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchMatches } from './api-client.js';
 import './App.css';
 import Header from './components/Header.js';
-import MatchHeader from './components/MatchHeader.js';
+import IndividualMatch from './components/IndividualMatch.js';
 import MatchSelect from './components/MatchSelect.js';
 import NextMatches from './components/NextMatches.js';
 
@@ -28,10 +28,6 @@ function App() {
 
   const handleSelect = () => {
     if (document.getElementById('match-select').value != '') {
-      // const selMatch = matches.filter(
-      //   (match) =>
-      //     match.matchid == document.getElementById('match-select').value
-      // );
       setSelectedMatch(document.getElementById('match-select').value);
     } else {
       setSelectedMatch('');
@@ -54,10 +50,14 @@ function App() {
           )}
         </div>
 
-        <div className="match-header">
-          {matches.length !== 0 && selectedMatch.length !== 0 && matches
-          .filter((match) => match.matchid == selectedMatch)
-          .map((match) => <MatchHeader match={match} /> )}
+        <div className="individual-match">
+          {matches.length !== 0 && selectedMatch.length !== 0 && (
+            <IndividualMatch
+              match={
+                matches.find((match) => match.matchid == selectedMatch)
+              }
+            />
+          )}
         </div>
       </div>
     </div>

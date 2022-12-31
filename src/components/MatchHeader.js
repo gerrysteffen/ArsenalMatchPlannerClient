@@ -1,5 +1,6 @@
 import React from 'react';
-import MatchBanner from './MatchBanner';
+import MatchBanner from './MatchBanner.js';
+import MatchInfo from './MatchInfo.js';
 
 function MatchHeader({match}) {
   return (
@@ -7,8 +8,8 @@ function MatchHeader({match}) {
       <div>
         <MatchBanner match={match} />
       </div>
-      <div className='MHInfo'>
-        {match.date} - {match.tournament}, Round {match.round}: 
+      <div>
+        <MatchInfo match={match}/>
       </div>
       <div>
         

@@ -45,14 +45,14 @@
   margin-top: 10px;
 }
 
-.MHInfoShort {
+.MatchInfoShort {
   font-style: italic;
   font-size: smaller;
   color: #9d834a;
   margin-bottom: 3px;
 }
 
-.MHBanner {
+.MatchBanner {
   border: 1px solid black;
   border-radius: 5px;
   display: flex;
@@ -61,13 +61,13 @@
   position: relative;
 }
 
-.MHHome {
+.BannerHome {
   padding: 5px;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   width: 50%;
 }
-.MHAway {
+.BannerAway {
   padding: 5px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -75,10 +75,9 @@
   text-align: right;
 }
 
-.MHVS {
+.BannerVS {
   position: absolute;
   top: 0;
-  /* left: 45%; */
   left: 0;
   right: 0;
   margin-left: auto;
@@ -88,7 +87,7 @@
   justify-content: center;
 }
 
-.MHVS div {
+.BannerVS div {
   padding: 4px;
   border: 1px solid black;
   border-radius: 100%;
@@ -97,6 +96,16 @@
   text-align: center;
 }
 
+.MatchInfo {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  /* row-gap: 1em; */
+}
 
+.reserved-tickets {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
 
-/* Arsenal Colors: #cc0000 "secondary": "#ffffff",*/
