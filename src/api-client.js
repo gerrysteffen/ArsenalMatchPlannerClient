@@ -21,3 +21,15 @@ export const postTicketReservation = async (newTicketReservation) => {
   }).catch((error) => console.log(error));
   return res.json();
 };
+
+export const deleteTicketReservation = async (id) => {
+  const res = await fetch(url + '/tickets', {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({id})
+  }).catch((error) => console.log(error));
+  return res.json();
+};

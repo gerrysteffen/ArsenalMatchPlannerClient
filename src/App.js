@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchMatches, fetchTicketReservations, postTicketReservation } from './api-client.js';
+import { deleteTicketReservation, fetchMatches, fetchTicketReservations, postTicketReservation } from './api-client.js';
 import './App.css';
 import Header from './components/Header.js';
 import IndividualMatch from './components/IndividualMatch.js';
@@ -45,7 +45,7 @@ function App() {
     setUser(event.target[0].value)
   }
 
-  const handleTicketSubmit = async (event) => {
+  const handleTicketCreate = async (event) => {
     event.preventDefault()
     const newReservation = {
       matchid: selectedMatch,
@@ -55,6 +55,16 @@ function App() {
     const res = await postTicketReservation(newReservation)
     setResTics([...reservedTickets, res])
   }
+
+  const handleTicketDelete = async (id) => {
+    const res = await deleteTicketReservation(id)
+    if (res.acknowledged === true) {
+      const newReservedTickets = reservedTickets.slice().filter((ticket)=>ticket._id != id)
+      setResTics(newReservedTickets)
+    }
+  }
+
+  const handleTicketEdit = async (event) => {}
 
   return (
     <div className="App">
@@ -81,8 +91,14 @@ function App() {
               match={
                 matches.find((match) => match.matchid == selectedMatch)
               }
-              reservedTickets = {reservedTickets.filter((ticket) => ticket.matchid == selectedMatch)}
-              handleTicketSubmit = {handleTicketSubmit}
+              // reservedTickets = {reservedTickets.filter((ticket) => ticket.matchid == selectedMatch)}
+              // handleTicketSubmit = {handleTicketCreate}
+              tickets = {{
+                reservations: reservedTickets.filter((ticket) => ticket.matchid == selectedMatch),
+                create: handleTicketCreate,
+                delete: handleTicketDelete,
+                edit: handleTicketEdit,
+              }}
             />
           )}
         </div>

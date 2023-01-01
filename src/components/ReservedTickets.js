@@ -1,11 +1,11 @@
 import React from 'react';
 import Reservation from './Reservation';
 
-function ReservedTickets({ reservedTickets, handleTicketSubmit }) {
+function ReservedTickets({ tickets }) {
   return (
     <div className="reserved-tickets">
       <div>
-        <form onSubmit={(event) => handleTicketSubmit(event)}>
+        <form onSubmit={(event) => tickets.create(event)}>
           <label>Claim ticket: </label>
           <select>
             <option value="1">1 ticket</option>
@@ -16,12 +16,12 @@ function ReservedTickets({ reservedTickets, handleTicketSubmit }) {
           <input type="submit"></input>
         </form>
       </div>
-      <div>{reservedTickets.length > 0 && 'Reserved tickets:'}</div>
+      <div>{tickets.reservations.length > 0 && 'Reserved tickets:'}</div>
       <div>
-        {reservedTickets.length > 0 &&
-          reservedTickets.map((reservation) => {
+        {tickets.reservations.length > 0 &&
+          tickets.reservations.map((reservation) => {
             return (
-              <Reservation key={reservation._id} reservation={reservation} />
+              <Reservation key={reservation._id} reservation={reservation} tickets={tickets} />
             );
           })}
       </div>

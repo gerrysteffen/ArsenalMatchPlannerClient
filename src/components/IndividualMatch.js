@@ -2,11 +2,11 @@ import React from 'react';
 import MatchHeader from './MatchHeader.js';
 import ReservedTickets from './ReservedTickets.js';
 
-function IndividualMatch({ match, reservedTickets, handleTicketSubmit }) {
+function IndividualMatch({ match, tickets }) {
   return (
     <div>
       <MatchHeader match={match} />
-      <ReservedTickets reservedTickets={reservedTickets} handleTicketSubmit={handleTicketSubmit} />
+      <ReservedTickets tickets={tickets} />
     </div>
   );
 }
