@@ -1,16 +1,15 @@
 import React from 'react';
-import MatchBanner from './MatchBanner';
-import MatchHeader from './MatchHeader';
-import MatchInfoShort from './MatchInfoShort';
+import MatchBanner from './MatchBanner.js';
+import MatchInfoShort from './MatchInfoShort.js';
 
 function NextMatches({matches}) {
   return (
     <div>
       {matches.map(match =>{
             return (
-              <div className='NextMatches'>
-                <MatchInfoShort key={match.matchid+"info"} match={match} />
-                <MatchBanner key={match.matchid+"banner"} match={match} />
+              <div key={match.matchid} className='NextMatches'>
+                <MatchInfoShort key={match.matchid+'1'} match={match} />
+                <MatchBanner key={match.matchid+'2'} match={match} />
               </div>
             )
       })}

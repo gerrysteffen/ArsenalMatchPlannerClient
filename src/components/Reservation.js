@@ -1,9 +1,15 @@
 import React from 'react';
 
-function Reservation(props) {
+function Reservation({reservation}) {
   return (
     <div>
-      Ticket
+      <div>
+        For: {reservation.user},
+        Number of Tickets: {reservation.numberOfTickets}
+      </div>
+      <div>
+        <button>Delete</button>
+      </div>
     </div>
   );
 }
