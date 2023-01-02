@@ -12,13 +12,14 @@ import IndividualMatch from './components/IndividualMatch.js';
 import MatchSelect from './components/MatchSelect.js';
 import NextMatches from './components/NextMatches.js';
 import SetUser from './components/SetUser.js';
-import { dateTransform } from './date-transformer.js';
+import { calculateAvailability, dateTransform } from './helperfunctions.js';
 
 function App() {
-  const [user, setUser] = useState('Gerry');
+  const [user, setUser] = useState('');
   const [matches, setMatches] = useState([]);
   const [reservedTickets, setResTics] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState('');
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     const getMatches = async () => {
@@ -29,6 +30,7 @@ function App() {
       setMatches(data);
     };
     getMatches();
+    setReady(false)
   }, []);
 
   useEffect(() => {
@@ -41,11 +43,18 @@ function App() {
       setResTics(data);
     };
     getReservedTickets();
-  }, []);
+  }, [matches]);
+
+  useEffect(() => {
+    setReady(false)
+    const newMatches = calculateAvailability(matches, reservedTickets)
+    setMatches(newMatches);
+    setReady(true)
+  }, [reservedTickets, matches]);
 
   const handleSelect = (event) => {
     if (event.target.value !== '') {
-      setSelectedMatch(event.target.value);
+      setSelectedMatch(Number(event.target.value));
     } else {
       setSelectedMatch('');
     }
@@ -74,7 +83,7 @@ function App() {
     if (status === 202) {
       const newReservedTickets = reservedTickets
         .slice()
-        .filter((ticket) => ticket._id != id);
+        .filter((ticket) => ticket._id !== id);
       setResTics(newReservedTickets);
     }
   };
@@ -90,6 +99,7 @@ function App() {
       comments: event.target[2].value
         ? event.target[2].value
         : reservation.comments,
+      updatedTimestamp: dateTransform(new Date()),
     };
     const status = await editTicketReservation(updatedTicket);
     if (status === 204) {
@@ -103,39 +113,51 @@ function App() {
 
   return (
     <div className="App">
-      <div className="Header">
+      <div className="header-container">
         <Header />
       </div>
-      <div className="body">
-        <div>
-          <SetUser user={user} handleUserChange={handleUserChange} />
-        </div>
-        <div className="dropdown">
-          <MatchSelect matches={matches} handleSelect={handleSelect} />
-        </div>
+      {ready ? (
+        <div className="body">
+          <div>
+            <div className='instructions'>
+              {'Step 1 - who is claiming tickets:'}
+            </div>
+            <SetUser user={user} handleUserChange={handleUserChange} />
+          </div>
+          <div>
+            <div className='instructions'>
+              {'Step 2 - choose the match:'}
+            </div>
+            <MatchSelect matches={matches} handleSelect={handleSelect} />
+          </div>
 
-        <div className="next-matches">
-          {matches.length !== 0 && selectedMatch === '' && (
-            <NextMatches matches={matches} />
-          )}
-        </div>
+          <div className="next-matches-container">
+            <div className='next-matches-title'>
+              UPCOMING MATCHES
+            </div>
+            {selectedMatch === '' && (
+              <NextMatches matches={matches} />
+            )}
+          </div>
 
-        <div className="individual-match">
-          {matches.length !== 0 && selectedMatch !== '' && (
-            <IndividualMatch
-              match={matches.find((match) => match.matchid == selectedMatch)}
-              tickets={{
-                reservations: reservedTickets.filter(
-                  (ticket) => ticket.matchid == selectedMatch
-                ),
-                create: handleTicketCreate,
-                delete: handleTicketDelete,
-                edit: handleTicketEdit,
-              }}
-            />
-          )}
+          <div className="individual-match">
+            {selectedMatch !== '' && (
+              <IndividualMatch
+                match={matches.find((match) => match.matchid === selectedMatch)}
+                tickets={{
+                  reservations: reservedTickets.filter(
+                    (ticket) => ticket.matchid === selectedMatch
+                  ),
+                  create: handleTicketCreate,
+                  delete: handleTicketDelete,
+                  edit: handleTicketEdit,
+                }}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      ) :
+      <div>loading...</div>}
     </div>
   );
 }

@@ -7,7 +7,7 @@ function NextMatches({matches}) {
     <div>
       {matches.map(match =>{
             return (
-              <div key={match.matchid} className='NextMatches'>
+              <div key={match.matchid} className='next-matches'>
                 <MatchInfoShort key={match.matchid+'1'} match={match} />
                 <MatchBanner key={match.matchid+'2'} match={match} />
               </div>

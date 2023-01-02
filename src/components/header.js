@@ -7,7 +7,8 @@ function Header() {
         <img src='./graphics/Arsenal_FC.svg' height='100px'></img>
       </div>
       <div>
-        <h1 id='title'>Tom's Match Planner</h1>
+        <h1 className='title'>Tom's</h1>
+        <h1 className='title'>Match Planner</h1>
       </div>
     </div>
   );
