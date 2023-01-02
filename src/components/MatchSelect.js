@@ -5,8 +5,8 @@ function MatchSelect({matches , handleSelect}) {
     <div className='match-select'>
       <select id='match-select' onChange={(event)=>handleSelect(event)}>
         <option value=''>-- Overview - select match --</option>
-        {matches.length > 0 && matches.map(data => {
-          return <option key={data.matchid} value={data.matchid}>{data.shortDate}: {data.homeTeamShort} vs. {data.awayTeamShort}</option>
+        {matches.length > 0 && matches.map((match) => {
+          return <option key={match.matchid} value={match.matchid}>{match.timestamp.shortDate}: {match.homeTeam.shortName} vs. {match.awayTeam.shortName}</option>
         })}
       </select>
     </div>

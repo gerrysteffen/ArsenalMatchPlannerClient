@@ -7,7 +7,7 @@ function MatchInfo({match}) {
         Date & Time:
       </div>
       <div>
-        {match.date}
+        {match.timestamp.date}
       </div>
       <div>
         Tournament:

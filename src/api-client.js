@@ -31,5 +31,17 @@ export const deleteTicketReservation = async (id) => {
     },
     body: JSON.stringify({id})
   }).catch((error) => console.log(error));
-  return res.json();
+  return res.status;
+};
+
+export const editTicketReservation = async (editedTicketReservation) => {
+  const res = await fetch(url + '/tickets', {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(editedTicketReservation)
+  }).catch((error) => console.log(error));
+  return res.status;
 };

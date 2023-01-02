@@ -1,10 +1,11 @@
-export const dateTransform = (data) => {
-  data.map((match) => {
-    const date = new Date(match.timestamp * 1000).toLocaleString('en-GB', {
-      timeZone: 'Europe/London',
-    });
-    match.date = date;
-    match.shortDate = match.date.slice(0, 10);
-  })
-  return data;
+export const dateTransform = (timestamp) => {
+  const date = new Date(timestamp).toLocaleString('en-GB', {
+    timeZone: 'Europe/London',
+  });
+  return {
+    timestamp: timestamp,
+    date: date.slice(0, 17),
+    shortDate: date.slice(0, 10),
+    time: date.slice(11,17)
+  }
 }
