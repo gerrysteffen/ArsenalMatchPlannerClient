@@ -45,3 +45,20 @@ export const editTicketReservation = async (editedTicketReservation) => {
   }).catch((error) => console.log(error));
   return res.status;
 };
+
+export const fetchUsers = async () => {
+  const res = await fetch(url + '/users').catch((error) => console.log(error));
+  return res.json();
+};
+
+export const postUser = async (newUser) => {
+  const res = await fetch(url + '/users', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newUser)
+  }).catch((error) => console.log(error));
+  return res.json();
+};

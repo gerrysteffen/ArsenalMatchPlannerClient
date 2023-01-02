@@ -16,15 +16,18 @@ function ReservedTickets({ tickets }) {
         </form>
       </div>
       <div>
-        <div className='instructions'>
-          {'Previous reservations for this match:'}
-        </div>
-        {tickets.reservations.length > 0 &&
-          tickets.reservations.map((reservation) => {
-            return (
-              <Reservation key={reservation._id} reservation={reservation} tickets={tickets} />
-            );
-          })}
+        {tickets.reservations.length > 0 && (
+          <div>
+            <div className='instructions'>
+              {'Previous reservations for this match:'}
+            </div>
+            {tickets.reservations.map((reservation) => {
+              return (
+                <Reservation key={reservation._id} reservation={reservation} tickets={tickets} />
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -4,7 +4,9 @@ import {
   editTicketReservation,
   fetchMatches,
   fetchTicketReservations,
+  fetchUsers,
   postTicketReservation,
+  postUser,
 } from './api-client.js';
 import './App.css';
 import Header from './components/Header.js';
@@ -15,41 +17,50 @@ import SetUser from './components/SetUser.js';
 import { calculateAvailability, dateTransform } from './helperfunctions.js';
 
 function App() {
-  const [user, setUser] = useState('');
+  const [activeUser, setActiveUser] = useState('');
+  const [users, setUsers] = useState([]);
   const [matches, setMatches] = useState([]);
   const [reservedTickets, setResTics] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState('');
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await fetchUsers();
+      setUsers(data);
+    };
+    getUsers();
+  }, []);
 
   useEffect(() => {
     const getMatches = async () => {
       const data = await fetchMatches();
       data.forEach((match) => {
-        match.timestamp = dateTransform(match.timestamp)
-      })
+        match.timestamp = dateTransform(match.timestamp);
+      });
       setMatches(data);
     };
     getMatches();
-    setReady(false)
+    setReady(false);
   }, []);
 
   useEffect(() => {
     const getReservedTickets = async () => {
       const data = await fetchTicketReservations();
       data.forEach((ticket) => {
-        ticket.createdTimestamp = dateTransform(ticket.createdTimestamp)
-        ticket.updatedTimestamp = dateTransform(ticket.updatedTimestamp)
-      })
+        ticket.createdTimestamp = dateTransform(ticket.createdTimestamp);
+        ticket.updatedTimestamp = dateTransform(ticket.updatedTimestamp);
+      });
       setResTics(data);
     };
     getReservedTickets();
   }, [matches]);
 
   useEffect(() => {
-    setReady(false)
-    const newMatches = calculateAvailability(matches, reservedTickets)
+    setReady(false);
+    const newMatches = calculateAvailability(matches, reservedTickets);
     setMatches(newMatches);
-    setReady(true)
+    setReady(true);
   }, [reservedTickets, matches]);
 
   const handleSelect = (event) => {
@@ -60,21 +71,27 @@ function App() {
     }
   };
 
-  const handleUserChange = (event) => {
-    event.preventDefault();
-    setUser(event.target[0].value);
+  const handleUserChange = async (username) => {
+    if (
+      username !== '' &&
+      users.filter((data) => data.name === username).length === 0
+    ) {
+      const newUser = await postUser({ name: username });
+      setUsers([...users, newUser]);
+    }
+    setActiveUser(username);
   };
 
   const handleTicketCreate = async (event) => {
     event.preventDefault();
     const newReservation = {
       matchid: selectedMatch,
-      user: user,
+      user: activeUser,
       numberOfTickets: Number(event.target[0].value),
     };
     const ticket = await postTicketReservation(newReservation);
-    ticket.createdTimestamp = dateTransform(ticket.createdTimestamp)
-    ticket.updatedTimestamp = dateTransform(ticket.updatedTimestamp)
+    ticket.createdTimestamp = dateTransform(ticket.createdTimestamp);
+    ticket.updatedTimestamp = dateTransform(ticket.updatedTimestamp);
     setResTics([...reservedTickets, ticket]);
   };
 
@@ -119,24 +136,24 @@ function App() {
       {ready ? (
         <div className="body">
           <div>
-            <div className='instructions'>
+            <div className="instructions">
               {'Step 1 - who would like to use tickets:'}
             </div>
-            <SetUser user={user} handleUserChange={handleUserChange} />
+            <SetUser
+              activeUser={activeUser}
+              users={users}
+              handleUserChange={handleUserChange}
+            />
           </div>
           <div>
-            <div className='instructions'>
-              {'Step 2 - choose the match:'}
-            </div>
+            <div className="instructions">{'Step 2 - choose the match:'}</div>
             <MatchSelect matches={matches} handleSelect={handleSelect} />
           </div>
 
           <div className="next-matches-container">
             {selectedMatch === '' && (
               <div>
-                <div className='next-matches-title'>
-                  UPCOMING MATCHES
-                </div>
+                <div className="next-matches-title">UPCOMING MATCHES</div>
                 <NextMatches matches={matches} />
               </div>
             )}
@@ -158,8 +175,9 @@ function App() {
             )}
           </div>
         </div>
-      ) :
-      <div>loading...</div>}
+      ) : (
+        <div>loading...</div>
+      )}
     </div>
   );
 }
