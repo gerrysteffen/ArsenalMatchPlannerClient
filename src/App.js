@@ -120,7 +120,7 @@ function App() {
         <div className="body">
           <div>
             <div className='instructions'>
-              {'Step 1 - who is claiming tickets:'}
+              {'Step 1 - who would like to use tickets:'}
             </div>
             <SetUser user={user} handleUserChange={handleUserChange} />
           </div>
@@ -132,11 +132,13 @@ function App() {
           </div>
 
           <div className="next-matches-container">
-            <div className='next-matches-title'>
-              UPCOMING MATCHES
-            </div>
             {selectedMatch === '' && (
-              <NextMatches matches={matches} />
+              <div>
+                <div className='next-matches-title'>
+                  UPCOMING MATCHES
+                </div>
+                <NextMatches matches={matches} />
+              </div>
             )}
           </div>
 

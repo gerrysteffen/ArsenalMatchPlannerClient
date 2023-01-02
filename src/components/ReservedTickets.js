@@ -3,21 +3,22 @@ import Reservation from './Reservation';
 
 function ReservedTickets({ tickets }) {
   return (
-    <div className="reserved-tickets">
+    <div>
       <div>
-        <form onSubmit={(event) => tickets.create(event)}>
-          <label>Claim ticket: </label>
-          <select>
+        <form className='dropdown-line' onSubmit={(event) => tickets.create(event)}>
+          <select className='dropdown'>
             <option value="1">1 ticket</option>
             <option value="2">2 tickets</option>
             <option value="3">3 tickets</option>
             <option value="4">4 tickets</option>
           </select>
-          <input type="submit"></input>
+          <input className='button' type="submit"></input>
         </form>
       </div>
-      <div>{tickets.reservations.length > 0 && 'Reserved tickets:'}</div>
       <div>
+        <div className='instructions'>
+          {'Previous reservations for this match:'}
+        </div>
         {tickets.reservations.length > 0 &&
           tickets.reservations.map((reservation) => {
             return (

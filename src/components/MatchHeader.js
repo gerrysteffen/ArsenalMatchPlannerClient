@@ -4,7 +4,7 @@ import MatchInfo from './MatchInfo.js';
 
 function MatchHeader({match}) {
   return (
-    <div className='MatchHeader'>
+    <div className='match-header'>
       <div>
         <MatchBanner match={match} />
       </div>

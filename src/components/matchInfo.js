@@ -2,24 +2,24 @@ import React from 'react';
 
 function MatchInfo({match}) {
   return (
-    <div className='MatchInfo'>
+    <div className='match-info'>
       <div>
-        Date & Time:
+        Date:
       </div>
       <div>
-        {match.timestamp.date}
+        {match.timestamp.weekday+', '+match.timestamp.shortDate}
+      </div>
+      <div>
+        Time:
+      </div>
+      <div>
+        {match.timestamp.time}
       </div>
       <div>
         Tournament:
       </div>
       <div>
-        {match.tournament}
-      </div>
-      <div>
-        Round:
-      </div>
-      <div>
-        {match.round}
+        {match.tournament+', Round '+match.round}
       </div>
       <div>
         Home Team:
@@ -32,6 +32,17 @@ function MatchInfo({match}) {
       </div>
       <div>
         {match.awayTeam.name}
+      </div>
+      <div>
+        Tickets available:
+      </div>
+      <div className='status'>
+        {match.availableTickets ? 
+          (match.availableTickets-match.claimedTickets)+' / '+match.availableTickets : 
+          ' no tickets'}
+        {match.availableTickets && match.claimedTickets < match.availableTickets ? 
+          <div className='status-circle green'></div> : 
+          <div className='status-circle red'></div>}
       </div>
     </div>
   );
