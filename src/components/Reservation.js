@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Reservation({ reservation, tickets }) {
+function Reservation({ reservation, ticketMethods }) {
   const [editMode, setEditMode] = useState(false);
 
   const today = new Date()
@@ -11,64 +11,90 @@ function Reservation({ reservation, tickets }) {
 
   return (
     <div>
-      {!editMode ? (
-        <div>
-          <div>For: {reservation.user}</div>
-          <div>Number of Tickets: {reservation.numberOfTickets}</div>
-          <div>Comments: {reservation.comments}</div>
+      <div className="ticket">
+        {!editMode ? (
           <div>
-            Created:{' '}
-            {reservation.createdTimestamp.shortDate !== today
-              ? reservation.createdTimestamp.shortDate
-              : 'Today '+reservation.createdTimestamp.time}
-          </div>
-          {reservation.updatedTimestamp.date !==
-            reservation.createdTimestamp.date && (
-            <div>
-              {'Edited: '}
-              {reservation.updatedTimestamp.shortDate !== today
-                ? reservation.updatedTimestamp.date
-                : reservation.updatedTimestamp.shortDate !==
-                reservation.createdTimestamp.shortDate ? 
-                'Today ' + reservation.updatedTimestamp.time :
-                reservation.updatedTimestamp.time}
+            <div className="reservation-info">
+              <div>User:</div>
+              <div>{reservation.user}</div>
+              <div>#Tickets:</div>
+              <div>{reservation.numberOfTickets}</div>
+              <div>Comments:</div>
+              <div>{reservation.comments}</div>
             </div>
-          )}
-        </div>
-      ) : (
+            <button
+              className="button ticket-top-right"
+              onClick={() => setEditMode(!editMode)}
+            >
+              Edit
+            </button>
+            <button
+              className="button ticket-bottom-right"
+              onClick={() => ticketMethods.delete(reservation._id)}
+            >
+              Delete
+            </button>
+          </div>
+        ) : (
+          <div>
+            <form
+              className="reservation-info"
+              onSubmit={(event) => {
+                ticketMethods.edit(event, reservation);
+                setEditMode(!editMode);
+              }}
+            >
+              <label>User:</label>
+              <input
+                type="text"
+                id="user"
+                placeholder={reservation.user}
+              ></input>
+              <label>#Tickets:</label>
+              <input
+                type="text"
+                id="numberOfTickets"
+                placeholder={reservation.numberOfTickets}
+              ></input>
+              <label>Comments:</label>
+              <input
+                type="text"
+                id="comments"
+                placeholder={reservation.comments}
+              ></input>
+              <button
+                className="button ticket-top-right"
+                onClick={() => setEditMode(!editMode)}
+              >
+                Back
+              </button>
+              <input
+                className="button ticket-bottom-right"
+                type="submit"
+              ></input>
+            </form>
+          </div>
+        )}
+      </div>
+      <div className="created-tag">
         <div>
-          <form
-            onSubmit={(event) => {
-              tickets.edit(event, reservation);
-              setEditMode(!editMode);
-            }}
-          >
-            <label>For:</label>
-            <input type="text" id="user" placeholder={reservation.user}></input>
-            <br></br>
-            <label>Number of Tickets:</label>
-            <input
-              type="text"
-              id="numberOfTickets"
-              placeholder={reservation.numberOfTickets}
-            ></input>
-            <br></br>
-            <label>Comments:</label>
-            <input
-              type="text"
-              id="comments"
-              placeholder={reservation.comments}
-            ></input>
-            <br></br>
-            <input type="submit"></input>
-          </form>
+          {'Created: '}
+          {reservation.createdTimestamp.shortDate !== today
+            ? reservation.createdTimestamp.shortDate
+            : 'Today ' + reservation.createdTimestamp.time}
         </div>
-      )}
-      <div>
-        <button onClick={() => tickets.delete(reservation._id)}>Delete</button>
-        <button onClick={() => setEditMode(!editMode)}>
-          {!editMode ? 'Edit' : 'Back'}
-        </button>
+        {reservation.updatedTimestamp.date !==
+          reservation.createdTimestamp.date && (
+          <div>
+            {'Edited: '}
+            {reservation.updatedTimestamp.shortDate !== today
+              ? reservation.updatedTimestamp.date
+              : reservation.updatedTimestamp.shortDate !==
+                reservation.createdTimestamp.shortDate
+              ? 'Today ' + reservation.updatedTimestamp.time
+              : reservation.updatedTimestamp.time}
+          </div>
+        )}
       </div>
     </div>
   );

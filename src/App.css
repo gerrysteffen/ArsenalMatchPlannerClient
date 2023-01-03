@@ -1,3 +1,4 @@
+
 .App {
   display: flex;
   flex-direction: column;
@@ -7,8 +8,8 @@
 }
 
 .body {
-  width: 100%;
-  max-width: 500px;
+  width: 90%;
+  /* max-width: 200px; */
   margin: 20px;
 }
 
@@ -41,7 +42,8 @@
   display: flex;
   flex-direction: row;
   justify-content: stretch;
-  align-items: center;
+  align-items: stretch;
+  width: 100%;
 }
 
 .dropdown {
@@ -77,8 +79,9 @@
   color: gray;
   margin-bottom: 3px;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .MatchBanner {
@@ -125,8 +128,8 @@
   text-align: center;
 }
 
-/* .individual-match {
-  
+/* .visibility{
+  display: none;
 } */
 
 .match-info {
@@ -138,17 +141,10 @@
   border-bottom-right-radius: 5px;
   display: grid;
   grid-template-columns: 2fr 3fr;
-  /* row-gap: 1em; */
+  column-gap: 5px;
 }
 
-.reserved-tickets {
-  margin-top: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.instructions{
+.instructions {
   margin-top: 20px;
   margin-bottom: 10px;
   font-style: italic;
@@ -157,7 +153,7 @@
   font-weight: bold;
 }
 
-.status{
+.status {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -185,8 +181,73 @@
 
 .button {
   height: 31px;
-  width: 80px;
+  min-width: 80px;
   border: 1px solid black;
   border-radius: 5px;
-  margin-left: 5px
+  margin-left: 5px;
+}
+
+.ticket-top-right {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.ticket-bottom-right {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.no-tickets {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px 20px;
+  padding: 5px;
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+}
+
+.ticket {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 15px 40px 0px 40px;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: smaller;
+  position: relative;
+  height: 79px;
+}
+
+.created-tag {
+  margin-right: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  font-style: italic;
+  font-size: smaller;
+  gap: 10px;
+}
+
+.reservation-info{
+  height: 100%;
+  text-align: left;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: repeat(3, 19px);
+  margin: auto 0;
+  margin-right: 80px;
+}
+
+@media (min-width: 700px) {
+  .body {
+    max-width: 500px;
+  }
+}
+
+#step3warning{
+  display: none;
+  color: red;
 }

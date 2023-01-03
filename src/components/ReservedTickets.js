@@ -1,11 +1,11 @@
 import React from 'react';
 import Reservation from './Reservation';
 
-function ReservedTickets({ tickets }) {
+function ReservedTickets({ tickets, ticketMethods }) {
   return (
     <div>
       <div>
-        <form className='dropdown-line' onSubmit={(event) => tickets.create(event)}>
+        <form className='dropdown-line' onSubmit={(event) => ticketMethods.create(event)}>
           <select className='dropdown'>
             <option value="1">1 ticket</option>
             <option value="2">2 tickets</option>
@@ -16,14 +16,14 @@ function ReservedTickets({ tickets }) {
         </form>
       </div>
       <div>
-        {tickets.reservations.length > 0 && (
+        {tickets.length > 0 && (
           <div>
             <div className='instructions'>
               {'Previous reservations for this match:'}
             </div>
-            {tickets.reservations.map((reservation) => {
+            {tickets.map((reservation) => {
               return (
-                <Reservation key={reservation._id} reservation={reservation} tickets={tickets} />
+                <Reservation key={reservation._id} reservation={reservation} ticketMethods={ticketMethods} />
               );
             })}
           </div>

@@ -24,11 +24,11 @@ function SetUser({ activeUser, users, handleUserChange }) {
             handleUserSelect(event);
           }}
         >
-          <select className="dropdown">
+          <select className="dropdown" defaultValue={activeUser}>
             <option value={''}>-- Choose the user --</option>
             {users.length > 0 &&
               users.map((user) => (
-                <option key={user._id} value={user.name} selected={user.name === activeUser ? true : false}>
+                <option key={user._id} value={user.name}>
                   {user.name}
                 </option>
               ))}

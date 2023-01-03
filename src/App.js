@@ -72,6 +72,7 @@ function App() {
   };
 
   const handleUserChange = async (username) => {
+    setReady(false)
     if (
       username !== '' &&
       users.filter((data) => data.name === username).length === 0
@@ -80,19 +81,27 @@ function App() {
       setUsers([...users, newUser]);
     }
     setActiveUser(username);
+    setReady(true)
   };
 
   const handleTicketCreate = async (event) => {
     event.preventDefault();
-    const newReservation = {
-      matchid: selectedMatch,
-      user: activeUser,
-      numberOfTickets: Number(event.target[0].value),
-    };
-    const ticket = await postTicketReservation(newReservation);
-    ticket.createdTimestamp = dateTransform(ticket.createdTimestamp);
-    ticket.updatedTimestamp = dateTransform(ticket.updatedTimestamp);
-    setResTics([...reservedTickets, ticket]);
+    if (activeUser) {
+      const newReservation = {
+        matchid: selectedMatch,
+        user: activeUser,
+        numberOfTickets: Number(event.target[0].value),
+      };
+      const ticket = await postTicketReservation(newReservation);
+      ticket.createdTimestamp = dateTransform(ticket.createdTimestamp);
+      ticket.updatedTimestamp = dateTransform(ticket.updatedTimestamp);
+      setResTics([...reservedTickets, ticket]);
+    } else {
+      document.getElementById('step3warning').style.display = 'inline'
+      setInterval(()=>{
+        document.getElementById('step3warning').style.display = 'none'
+      }, 5000)
+    }
   };
 
   const handleTicketDelete = async (id) => {
@@ -163,10 +172,10 @@ function App() {
             {selectedMatch !== '' && (
               <IndividualMatch
                 match={matches.find((match) => match.matchid === selectedMatch)}
-                tickets={{
-                  reservations: reservedTickets.filter(
-                    (ticket) => ticket.matchid === selectedMatch
-                  ),
+                tickets={reservedTickets.filter(
+                  (ticket) => ticket.matchid === selectedMatch
+                )}
+                ticketMethods={{
                   create: handleTicketCreate,
                   delete: handleTicketDelete,
                   edit: handleTicketEdit,
