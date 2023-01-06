@@ -247,7 +247,12 @@
   }
 }
 
-#step3warning{
+.step3warning{
   display: none;
   color: red;
+}
+
+#step3confirmation {
+  display: none;
+  color: green;
 }

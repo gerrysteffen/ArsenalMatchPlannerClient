@@ -84,22 +84,30 @@ function App() {
     setReady(true)
   };
 
-  const handleTicketCreate = async (event) => {
-    event.preventDefault();
-    if (activeUser) {
+  const handleTicketCreate = async (numTickets) => {
+    if (!activeUser) {
+      document.getElementById('warningUser').style.display = 'inline'
+      setInterval(()=>{
+        document.getElementById('warningUser').style.display = 'none'
+      }, 5000)
+    } else if (!numTickets) {
+      document.getElementById('warningTickets').style.display = 'inline'
+      setInterval(()=>{
+        document.getElementById('warningTickets').style.display = 'none'
+      }, 5000)
+    } else {
       const newReservation = {
         matchid: selectedMatch,
         user: activeUser,
-        numberOfTickets: Number(event.target[0].value),
+        numberOfTickets: Number(numTickets),
       };
       const ticket = await postTicketReservation(newReservation);
       ticket.createdTimestamp = dateTransform(ticket.createdTimestamp);
       ticket.updatedTimestamp = dateTransform(ticket.updatedTimestamp);
       setResTics([...reservedTickets, ticket]);
-    } else {
-      document.getElementById('step3warning').style.display = 'inline'
+      document.getElementById('step3confirmation').style.display = 'inline'
       setInterval(()=>{
-        document.getElementById('step3warning').style.display = 'none'
+        document.getElementById('step3confirmation').style.display = 'none'
       }, 5000)
     }
   };
