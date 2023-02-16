@@ -4,7 +4,7 @@ function Header() {
   return (
     <div className='header'>
       <div>
-        <img src='./graphics/Arsenal_FC.svg' height='100px'></img>
+        <img src='./graphics/Arsenal_FC.svg' alt='Arsenal FC logo' height='100px'></img>
       </div>
       <div>
         <h1 className='title'>Tom's</h1>
