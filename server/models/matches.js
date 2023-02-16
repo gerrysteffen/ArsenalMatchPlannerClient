@@ -34,13 +34,20 @@ export const getAllMatches = async () => {
   return await Match.find({});
 };
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+const footapiURL = process.env.footapiURL;
+const key = process.env.footapiKey
+const host = process.env.footapiHost
+
 export const fetchMatches = async () => {
   const options = {
     method: 'GET',
-    url: 'https://footapi7.p.rapidapi.com/api/team/42/matches/next/0',
+    url: footapiURL,
     headers: {
-      'X-RapidAPI-Key': 'b6e6d19dd9msh13b791c48dcebe2p1b8513jsnb81f12383a26',
-      'X-RapidAPI-Host': 'footapi7.p.rapidapi.com',
+      'X-RapidAPI-Key': key,
+      'X-RapidAPI-Host': host,
     },
   };
   let res;
