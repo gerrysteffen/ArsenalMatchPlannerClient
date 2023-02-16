@@ -4,10 +4,13 @@
   "icons": [
     {
       "src": "./graphics/Arsenal_FC.svg",
-      "type": "image/svg+xml",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
+  "background_color": "#cc0000",
+  "scope": "/",
+  "theme_color": "#cc0000",
   "display": "standalone"
 }
