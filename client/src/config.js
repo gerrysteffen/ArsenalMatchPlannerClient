@@ -1,11 +1,10 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import env from "react-dotenv";
 
 console.log('hello')
-console.log(process.env.backEndURL)
+console.log(env.backEndURL)
 
 const config = {
-  backEndURL: process.env.backEndURL ? process.env.backEndURL : 'http://localhost:3005',
+  backEndURL: env.backEndURL ? env.backEndURL : 'http://localhost:3005',
 };
 
 export default config;
