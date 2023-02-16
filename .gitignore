@@ -15,8 +15,7 @@ node_modules
 /build
 
 # misc
-server/fly.toml
-/fly.toml
+/server/fly.toml
 fly.toml
 .DS_Store
 .env
