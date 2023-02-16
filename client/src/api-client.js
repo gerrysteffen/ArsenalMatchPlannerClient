@@ -1,4 +1,5 @@
-import url from './config'
+import config from './config.js'
+const url = 'http://localhost:3006'
 
 export const fetchMatches = async () => {
   const res = await fetch(url + '/matches').catch((error) => console.log(error));

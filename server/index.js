@@ -12,7 +12,8 @@ app.use(bodyparser());
 
 app.use(router.routes());
 
-const port = 3002;
+import config from './config.js';
+const port = config.PORT;
 
 app.listen(port, () => {
   console.log(`server live on port ${port}`);

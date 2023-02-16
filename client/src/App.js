@@ -34,10 +34,12 @@ function App() {
 
   useEffect(() => {
     const getMatches = async () => {
+      console.log('doing')
       const data = await fetchMatches();
       data.forEach((match) => {
         match.timestamp = dateTransform(match.timestamp);
       });
+      console.log('doin')
       setMatches(data);
     };
     getMatches();
