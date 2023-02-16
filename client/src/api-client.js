@@ -1,5 +1,6 @@
 import config from './config.js'
 const url = config.backEndURL
+console.log('url:')
 console.log(url)
 
 export const fetchMatches = async () => {
