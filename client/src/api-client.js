@@ -1,10 +1,10 @@
 import config from './config.js'
-const url = config.backEndURL
+const backEndURL = config.backEndURL
 console.log('url:')
-console.log(url)
+console.log(backEndURL)
 
 export const fetchMatches = async () => {
-  const res = await fetch(url + '/matches').catch((error) => console.log(error));
+  const res = await fetch(backEndURL + '/matches').catch((error) => console.log(error));
   return res.json();
 };
 
@@ -14,7 +14,7 @@ export const fetchTicketReservations = async () => {
 };
 
 export const postTicketReservation = async (newTicketReservation) => {
-  const res = await fetch(url + '/tickets', {
+  const res = await fetch(backEndURL + '/tickets', {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -26,7 +26,7 @@ export const postTicketReservation = async (newTicketReservation) => {
 };
 
 export const deleteTicketReservation = async (id) => {
-  const res = await fetch(url + '/tickets', {
+  const res = await fetch(backEndURL + '/tickets', {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -38,7 +38,7 @@ export const deleteTicketReservation = async (id) => {
 };
 
 export const editTicketReservation = async (editedTicketReservation) => {
-  const res = await fetch(url + '/tickets', {
+  const res = await fetch(backEndURL + '/tickets', {
     method: 'PUT',
     mode: 'cors',
     headers: {
@@ -50,12 +50,12 @@ export const editTicketReservation = async (editedTicketReservation) => {
 };
 
 export const fetchUsers = async () => {
-  const res = await fetch(url + '/users').catch((error) => console.log(error));
+  const res = await fetch(backEndURL + '/users').catch((error) => console.log(error));
   return res.json();
 };
 
 export const postUser = async (newUser) => {
-  const res = await fetch(url + '/users', {
+  const res = await fetch(backEndURL + '/users', {
     method: 'POST',
     mode: 'cors',
     headers: {
