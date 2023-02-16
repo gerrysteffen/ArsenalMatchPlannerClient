@@ -1,3 +1,3 @@
 window.env = {
-  "backEndURL": "match-planner.fly.dev"
+  "backEndURL": "https://match-planner.fly.dev"
 };
