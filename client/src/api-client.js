@@ -4,7 +4,7 @@ console.log('url:')
 console.log(backEndURL)
 
 export const fetchMatches = async () => {
-  const res = await fetch('https://' + backEndURL + '/matches').catch((error) => console.log(error));
+  const res = await fetch(`https://${backEndURL}/matches`).catch((error) => console.log(error));
   return res.json();
 };
 
