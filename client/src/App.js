@@ -72,7 +72,7 @@ function App() {
   };
 
   const handleUserChange = async (username) => {
-    setReady(false)
+    setReady(false);
     if (
       username !== '' &&
       users.filter((data) => data.name === username).length === 0
@@ -81,20 +81,22 @@ function App() {
       setUsers([...users, newUser]);
     }
     setActiveUser(username);
-    setReady(true)
+    setReady(true);
   };
 
   const handleTicketCreate = async (numTickets) => {
     if (!activeUser) {
-      document.getElementById('warningUser').style.display = 'inline'
-      setInterval(()=>{
-        if (document.getElementById('warningUser')) document.getElementById('warningUser').style.display = 'none'
-      }, 5000)
+      document.getElementById('warningUser').style.display = 'inline';
+      setInterval(() => {
+        if (document.getElementById('warningUser'))
+          document.getElementById('warningUser').style.display = 'none';
+      }, 5000);
     } else if (!numTickets) {
-      document.getElementById('warningTickets').style.display = 'inline'
-      setInterval(()=>{
-        if (document.getElementById('warningTickets')) document.getElementById('warningTickets').style.display = 'none'
-      }, 5000)
+      document.getElementById('warningTickets').style.display = 'inline';
+      setInterval(() => {
+        if (document.getElementById('warningTickets'))
+          document.getElementById('warningTickets').style.display = 'none';
+      }, 5000);
     } else {
       const newReservation = {
         matchid: selectedMatch,
@@ -105,10 +107,11 @@ function App() {
       ticket.createdTimestamp = dateTransform(ticket.createdTimestamp);
       ticket.updatedTimestamp = dateTransform(ticket.updatedTimestamp);
       setResTics([...reservedTickets, ticket]);
-      document.getElementById('step3confirmation').style.display = 'inline'
-      setInterval(()=>{
-        if (document.getElementById('step3confirmation')) document.getElementById('step3confirmation').style.display = 'none'
-      }, 5000)
+      document.getElementById('step3confirmation').style.display = 'inline';
+      setInterval(() => {
+        if (document.getElementById('step3confirmation'))
+          document.getElementById('step3confirmation').style.display = 'none';
+      }, 5000);
     }
   };
 
@@ -146,14 +149,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="header-container">
+    <div className='App'>
+      <div className='header-container'>
         <Header />
       </div>
       {ready ? (
-        <div className="body">
+        <div className='body'>
           <div>
-            <div className="instructions">
+            <div className='instructions'>
               {'Step 1 - who would like to use tickets:'}
             </div>
             <SetUser
@@ -163,20 +166,24 @@ function App() {
             />
           </div>
           <div>
-            <div className="instructions">{'Step 2 - choose the match:'}</div>
-            <MatchSelect matches={matches} selectedMatch={selectedMatch} handleSelect={handleSelect} />
+            <div className='instructions'>{'Step 2 - choose the match:'}</div>
+            <MatchSelect
+              matches={matches}
+              selectedMatch={selectedMatch}
+              handleSelect={handleSelect}
+            />
           </div>
 
-          <div className="next-matches-container">
+          <div className='next-matches-container'>
             {selectedMatch === '' && (
               <div>
-                <div className="next-matches-title">UPCOMING MATCHES</div>
+                <div className='next-matches-title'>UPCOMING MATCHES</div>
                 <NextMatches matches={matches} handleSelect={handleSelect} />
               </div>
             )}
           </div>
 
-          <div className="individual-match">
+          <div className='individual-match'>
             {selectedMatch !== '' && (
               <IndividualMatch
                 match={matches.find((match) => match.matchid === selectedMatch)}
