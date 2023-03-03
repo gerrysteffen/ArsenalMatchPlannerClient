@@ -88,12 +88,12 @@ function App() {
     if (!activeUser) {
       document.getElementById('warningUser').style.display = 'inline'
       setInterval(()=>{
-        document.getElementById('warningUser').style.display = 'none'
+        if (document.getElementById('warningUser')) document.getElementById('warningUser').style.display = 'none'
       }, 5000)
     } else if (!numTickets) {
       document.getElementById('warningTickets').style.display = 'inline'
       setInterval(()=>{
-        document.getElementById('warningTickets').style.display = 'none'
+        if (document.getElementById('warningTickets')) document.getElementById('warningTickets').style.display = 'none'
       }, 5000)
     } else {
       const newReservation = {
@@ -107,7 +107,7 @@ function App() {
       setResTics([...reservedTickets, ticket]);
       document.getElementById('step3confirmation').style.display = 'inline'
       setInterval(()=>{
-        document.getElementById('step3confirmation').style.display = 'none'
+        if (document.getElementById('step3confirmation')) document.getElementById('step3confirmation').style.display = 'none'
       }, 5000)
     }
   };

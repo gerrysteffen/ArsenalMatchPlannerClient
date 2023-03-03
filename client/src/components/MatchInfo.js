@@ -5,9 +5,10 @@ function MatchInfo({match, tickets}) {
 
   useEffect(()=>{
     setTimeout(()=>{
-      setRemainingTickets(match.availableTickets-match.claimedTickets)
+      const newRemainingTickets = match.availableTickets-match.claimedTickets
+      setRemainingTickets(newRemainingTickets)
     }, 100)
-  }, [tickets])
+  }, [tickets, match])
 
   return (
     <div className='match-info'>
