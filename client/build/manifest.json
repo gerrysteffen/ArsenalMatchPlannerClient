@@ -3,9 +3,9 @@
   "short_name": "Match Planner",
   "icons": [
     {
-      "src": "./graphics/Arsenal_FC.svg",
-      "type": "image/svg+xml",
-      "sizes": "512x512"
+      "src": "./graphics/arsenal_logo.png",
+      "type": "image/png",
+      "sizes": "57x57"
     }
   ],
   "start_url": ".",
