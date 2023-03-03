@@ -34,12 +34,10 @@ function App() {
 
   useEffect(() => {
     const getMatches = async () => {
-      console.log('doing')
       const data = await fetchMatches();
       data.forEach((match) => {
         match.timestamp = dateTransform(match.timestamp);
       });
-      console.log('doin')
       setMatches(data);
     };
     getMatches();
@@ -65,9 +63,9 @@ function App() {
     setReady(true);
   }, [reservedTickets, matches]);
 
-  const handleSelect = (event) => {
-    if (event.target.value !== '') {
-      setSelectedMatch(Number(event.target.value));
+  const handleSelect = (matchId) => {
+    if (matchId !== '') {
+      setSelectedMatch(Number(matchId));
     } else {
       setSelectedMatch('');
     }
@@ -166,14 +164,14 @@ function App() {
           </div>
           <div>
             <div className="instructions">{'Step 2 - choose the match:'}</div>
-            <MatchSelect matches={matches} handleSelect={handleSelect} />
+            <MatchSelect matches={matches} selectedMatch={selectedMatch} handleSelect={handleSelect} />
           </div>
 
           <div className="next-matches-container">
             {selectedMatch === '' && (
               <div>
                 <div className="next-matches-title">UPCOMING MATCHES</div>
-                <NextMatches matches={matches} />
+                <NextMatches matches={matches} handleSelect={handleSelect} />
               </div>
             )}
           </div>

@@ -1,10 +1,19 @@
 import React from 'react';
 
-function MatchSelect({ matches, handleSelect }) {
+function MatchSelect({ matches, selectedMatch, handleSelect }) {
+  const handleChange = (e) => {
+    handleSelect(e.target.value);
+  };
+
   return (
-    <div className="match-select">
-      <select id="match-select" className='dropdown' onChange={(event) => handleSelect(event)}>
-        <option value="">-- Overview - select match --</option>
+    <div className='match-select'>
+      <select
+        id='match-select'
+        className='dropdown'
+        value={selectedMatch}
+        onChange={(event) => handleChange(event)}
+      >
+        <option value=''>-- Overview - select match --</option>
         {matches.length > 0 &&
           matches.map((match) => {
             return (
@@ -14,9 +23,13 @@ function MatchSelect({ matches, handleSelect }) {
                 {match.homeTeam.shortName}
                 {' vs. '}
                 {match.awayTeam.shortName}
-                {match.availableTickets ? 
-                ' (avail: '+(match.availableTickets-match.claimedTickets)+' / '+match.availableTickets+')' : 
-                ' (no tickets)'}
+                {match.availableTickets
+                  ? ' (avail: ' +
+                    (match.availableTickets - match.claimedTickets) +
+                    ' / ' +
+                    match.availableTickets +
+                    ')'
+                  : ' (no tickets)'}
               </option>
             );
           })}

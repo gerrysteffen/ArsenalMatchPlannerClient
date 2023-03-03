@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-function MatchInfo({match}) {
+function MatchInfo({match, tickets}) {
+  const [remainingTickets, setRemainingTickets] = useState(0)
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setRemainingTickets(match.availableTickets-match.claimedTickets)
+    }, 100)
+  }, [tickets])
+
   return (
     <div className='match-info'>
       <div>
@@ -38,7 +46,7 @@ function MatchInfo({match}) {
       </div>
       <div className='status'>
         {match.availableTickets ? 
-          (match.availableTickets-match.claimedTickets)+' / '+match.availableTickets : 
+          remainingTickets+' / '+match.availableTickets : 
           ' no tickets'}
         {match.availableTickets && match.claimedTickets < match.availableTickets ? 
           <div className='status-circle green'></div> : 

@@ -5,7 +5,7 @@ import ReservedTickets from './ReservedTickets.js';
 function IndividualMatch({ match, tickets, ticketMethods }) {
   return (
     <div>
-      <MatchHeader match={match} />
+      <MatchHeader match={match} tickets={tickets}/>
       <div>
         <div className='instructions'>
           {'Step 3 - claim your ticket:'}{' '}

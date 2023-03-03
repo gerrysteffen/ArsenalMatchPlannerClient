@@ -1,7 +1,5 @@
 import config from './config.js'
 const backEndURL = config.backEndURL
-console.log('url:')
-console.log(backEndURL)
 
 export const fetchMatches = async () => {
   const res = await fetch(backEndURL + '/matches').catch((error) => console.log(error));
