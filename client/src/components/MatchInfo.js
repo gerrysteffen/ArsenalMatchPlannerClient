@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 function MatchInfo({match, tickets}) {
   const [remainingTickets, setRemainingTickets] = useState(0)
 
-  useEffect(()=>{
+  useEffect((match)=>{
     setTimeout(()=>{
       setRemainingTickets(match.availableTickets-match.claimedTickets)
     }, 100)
