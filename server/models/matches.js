@@ -2,6 +2,7 @@
 
 import mongoose from './index.js';
 import axios from 'axios';
+import cron from 'node-cron'
 
 const matchSchema = new mongoose.Schema({
   matchid: Number,
@@ -93,6 +94,7 @@ export const saveDataToDatabase = async (data) => {
         },
       },
     };
+    console.log(dataPoint)
     const previousDatapoint = await Match.find({ matchid: dataPoint.matchid });
     if (previousDatapoint.length === 0) {
       await createOneMatch(dataPoint);
@@ -157,3 +159,8 @@ const updateOneMatch = async (dataPointInput) => {
     }
   );
 };
+
+cron.schedule('0 0 * * *', async () => {
+  await fetchMatches()
+  console.log('Api call done')
+});
