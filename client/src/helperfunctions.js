@@ -14,7 +14,7 @@ export const dateTransform = (timestamp) => {
   };
 };
 
-const availableTickets = 4;
+const availableTickets = 12;
 
 export const calculateAvailability = (matches, reservedTickets) => {
   for (let match of matches) {
