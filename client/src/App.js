@@ -153,6 +153,8 @@ function App() {
       <div className='header-container'>
         <Header />
       </div>
+      <div className='bottom-nav'>
+      </div>
       {ready ? (
         <div className='body'>
           <div>

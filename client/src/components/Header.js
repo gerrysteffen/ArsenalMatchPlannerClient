@@ -3,12 +3,16 @@ import React from 'react';
 function Header() {
   return (
     <div className='header'>
-      <div>
-        <img src='./graphics/Arsenal_FC.svg' alt='Arsenal FC logo' height='100px'></img>
+      <div className='header'>
+        <div>
+          <img src='./graphics/Arsenal_FC.svg' alt='Arsenal FC logo' height='40px'></img>
+        </div>
+        <div>
+          <h1 className='title'>Tom's Match Planner</h1>
+        </div>
       </div>
       <div>
-        <h1 className='title'>Tom's</h1>
-        <h1 className='title'>Match Planner</h1>
+        Icons
       </div>
     </div>
   );
