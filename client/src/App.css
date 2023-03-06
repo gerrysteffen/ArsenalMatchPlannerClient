@@ -5,6 +5,8 @@
   justify-content: flex-start;
   align-items: center;
   width: 100vw;
+  height: 100vh;
+  overflow: none;
 }
 
 .header-container {
@@ -51,6 +53,12 @@
   max-width: 500px;
   margin: 0 20px;
   overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+}
+
+.body::-webkit-scrollbar {
+  display: none;
 }
 
 .bottom-nav{

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsFillPersonFill } from "react-icons/bs";
 
 function Header() {
   return (
@@ -12,7 +13,7 @@ function Header() {
         </div>
       </div>
       <div>
-        Icons
+        <BsFillPersonFill size='32px' color='white' />
       </div>
     </div>
   );
