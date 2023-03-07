@@ -1,9 +1,5 @@
 
 .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   width: 100vw;
   height: 100vh;
   overflow: none;
@@ -18,10 +14,9 @@
   height: 50px;
   border: none;
   border-bottom: 5px solid #023474;
-  padding: 0 20px;
 }
 
-.header {
+.flex-row-between {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -48,26 +43,54 @@
   position: absolute;
   top: 50px;
   left: 0px;
+  right: 0px;
   bottom: 50px;
+}
+
+.flex-column-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.horizontal-limit {
   width: 90%;
   max-width: 500px;
   margin: 0 20px;
+}
+
+.body-scroll {
+  height: 100%;
   overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none; 
 }
 
-.body::-webkit-scrollbar {
+.body-scroll::-webkit-scrollbar {
   display: none;
 }
 
-.bottom-nav{
+.footer{
   position: absolute;
   left: 0px;
   bottom: 0px;
   height: 50px;
   width: 100%;
   background-color: #023474;
+}
+
+.footer-content{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.footer-content button{
+  width: 30%;
 }
 
 .dropdown {
@@ -108,11 +131,12 @@
   flex-wrap: wrap;
 }
 
-.MatchBannerButton{
+.invisible-button{
   width: 100%;
   height: 100%;
   background: none;
   border: none;
+  color: inherit;
 }
 
 .MatchBanner {

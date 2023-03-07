@@ -6,7 +6,7 @@ function MatchBanner({match, handleSelect}) {
   }
 
   return (
-    <button className='MatchBannerButton' onClick={handleClick}>
+    <button className='invisible-button' onClick={handleClick}>
       <div className='MatchBanner'>
           <div className='BannerHome' style={{'backgroundColor': match.homeTeam.teamColors.primary, 'color': match.homeTeam.teamColors.text}}>
             {match.homeTeam.shortName}

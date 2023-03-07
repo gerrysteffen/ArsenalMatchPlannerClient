@@ -9,6 +9,7 @@ import {
   postUser,
 } from './api-client.js';
 import './App.css';
+import Footer from './components/Footer.js';
 import Header from './components/Header.js';
 import IndividualMatch from './components/IndividualMatch.js';
 import MatchSelect from './components/MatchSelect.js';
@@ -150,60 +151,65 @@ function App() {
 
   return (
     <div className='App'>
-      <div className='header-container'>
+      <div className='header-container flex-column-center'>
         <Header />
       </div>
-      <div className='bottom-nav'>
-      </div>
       {ready ? (
-        <div className='body'>
-          <div>
-            <div className='instructions'>
-              {'Step 1 - who would like to use tickets:'}
-            </div>
-            <SetUser
-              activeUser={activeUser}
-              users={users}
-              handleUserChange={handleUserChange}
-            />
-          </div>
-          <div>
-            <div className='instructions'>{'Step 2 - choose the match:'}</div>
-            <MatchSelect
-              matches={matches}
-              selectedMatch={selectedMatch}
-              handleSelect={handleSelect}
-            />
-          </div>
-
-          <div className='next-matches-container'>
-            {selectedMatch === '' && (
-              <div>
-                <div className='next-matches-title'>UPCOMING MATCHES</div>
-                <NextMatches matches={matches} handleSelect={handleSelect} />
+        <div className='body flex-column-center'>
+          <div className='body-scroll horizontal-limit'>
+            <div>
+              <div className='instructions'>
+                {'Step 1 - who would like to use tickets:'}
               </div>
-            )}
-          </div>
-
-          <div className='individual-match'>
-            {selectedMatch !== '' && (
-              <IndividualMatch
-                match={matches.find((match) => match.matchid === selectedMatch)}
-                tickets={reservedTickets.filter(
-                  (ticket) => ticket.matchid === selectedMatch
-                )}
-                ticketMethods={{
-                  create: handleTicketCreate,
-                  delete: handleTicketDelete,
-                  edit: handleTicketEdit,
-                }}
+              <SetUser
+                activeUser={activeUser}
+                users={users}
+                handleUserChange={handleUserChange}
               />
-            )}
+            </div>
+            <div>
+              <div className='instructions'>{'Step 2 - choose the match:'}</div>
+              <MatchSelect
+                matches={matches}
+                selectedMatch={selectedMatch}
+                handleSelect={handleSelect}
+              />
+            </div>
+
+            <div className='next-matches-container'>
+              {selectedMatch === '' && (
+                <div>
+                  <div className='next-matches-title'>UPCOMING MATCHES</div>
+                  <NextMatches matches={matches} handleSelect={handleSelect} />
+                </div>
+              )}
+            </div>
+
+            <div className='individual-match'>
+              {selectedMatch !== '' && (
+                <IndividualMatch
+                  match={matches.find(
+                    (match) => match.matchid === selectedMatch
+                  )}
+                  tickets={reservedTickets.filter(
+                    (ticket) => ticket.matchid === selectedMatch
+                  )}
+                  ticketMethods={{
+                    create: handleTicketCreate,
+                    delete: handleTicketDelete,
+                    edit: handleTicketEdit,
+                  }}
+                />
+              )}
+            </div>
           </div>
         </div>
       ) : (
         <div>loading...</div>
       )}
+      <div className='footer flex-column-center'>
+       <Footer />
+      </div>
     </div>
   );
 }
