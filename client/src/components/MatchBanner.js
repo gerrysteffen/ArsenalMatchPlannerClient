@@ -9,10 +9,10 @@ function MatchBanner({match, handleSelect}) {
     <button className='invisible-button' onClick={handleClick}>
       <div className='MatchBanner'>
           <div className='BannerHome' style={{'backgroundColor': match.homeTeam.teamColors.primary, 'color': match.homeTeam.teamColors.text}}>
-            {match.homeTeam.shortName}
+            {match.homeTeam.name.length < 20 ? match.homeTeam.name : match.homeTeam.shortName}
           </div>
           <div className='BannerAway' style={{'backgroundColor': match.awayTeam.teamColors.primary, 'color': match.awayTeam.teamColors.text}}>
-            {match.awayTeam.shortName}
+            {match.awayTeam.name.length < 20 ? match.awayTeam.name : match.awayTeam.shortName}
           </div>
           <div className='BannerVS'>
             <div>

@@ -1,16 +1,13 @@
 import React from 'react';
 
-function Footer() {
+function Footer({setSelectedMatch}) {
   return (
     <div className='footer-content horizontal-limit'>
-      <button className='invisible-button'>
-        <div style={{ textAlign: 'left' }}>Go Back</div>
+      <button className='invisible-button' onClick={()=>setSelectedMatch('')}>
+        <div style={{ textAlign: 'left' }}>Back to Overview</div>
       </button>
       <button className='invisible-button'>
-        <div style={{ textAlign: 'center' }}>Claim Ticket</div>
-      </button>
-      <button className='invisible-button'>
-        <div style={{ textAlign: 'right' }}>Reservations</div>
+        <div style={{ textAlign: 'right' }}>Claim your Ticket</div>
       </button>
     </div>
   );

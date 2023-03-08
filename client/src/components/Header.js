@@ -4,7 +4,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 function Header() {
   return (
     <div className='flex-row-between horizontal-limit'>
-      <div>
+      <div style={{width: '40px', textAlign: 'left'}}>
         <img
           src='./graphics/Arsenal_FC.svg'
           alt='Arsenal FC logo'
@@ -14,7 +14,7 @@ function Header() {
       <div>
         <h1 className='title'>Tom's Match Planner</h1>
       </div>
-      <div>
+      <div style={{width: '40px', textAlign: 'right'}}>
         <BsFillPersonFill size='32px' color='white' />
       </div>
     </div>

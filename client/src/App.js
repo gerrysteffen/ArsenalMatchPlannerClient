@@ -208,7 +208,7 @@ function App() {
         <div>loading...</div>
       )}
       <div className='footer flex-column-center'>
-       <Footer />
+        <Footer setSelectedMatch={setSelectedMatch} />
       </div>
     </div>
   );

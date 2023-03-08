@@ -90,7 +90,11 @@
 }
 
 .footer-content button{
-  width: 30%;
+  width: 50%;
+}
+
+.footer-content div {
+  font-size: 16px;
 }
 
 .dropdown {
@@ -184,10 +188,6 @@
   color: black;
   text-align: center;
 }
-
-/* .visibility{
-  display: none;
-} */
 
 .match-info {
   margin: 0px 20px;
@@ -298,11 +298,11 @@
   margin-right: 80px;
 }
 
-@media (min-width: 700px) {
+/* @media (min-width: 700px) {
   .body {
     max-width: 500px;
   }
-}
+} */
 
 .step3warning{
   display: none;
